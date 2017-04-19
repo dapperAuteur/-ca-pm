@@ -1,30 +1,19 @@
 <template>
   <div class="col-xs-12 col-sm-6">
-    <h1>Company Details {{ company.id }}</h1>
-    <button @click="logCompany">Log Company {{ company.id }}</button>
+    <h1>Company Details {{ companyDetails.name }}
+    {{ companyDetails.id }} </h1>
+    <!-- <button @click="logCompany">Log Company {{ company.id }}</button> -->
   </div>
 </template>
 
 <script>
   import Company from './Company';
-  import { eventBus } from '../../main';
+  import { state, mutations, getters, } from './../../store/modules/companies';
   export default {
-    props: ['companyDetails'],
-    data: function(){
-      return {
-        company: this
+    computed: {
+      companyDetails() {
+        return this.$store.state.company;
       }
-    },
-    methods: {
-      logCompany() {
-        console.log();
-      }
-    },
-    created() {
-      eventBus.$on('companySelected', (company) => {
-        this.company = company;
-        // console.log(this.company);
-      });
     }
   }
 </script>

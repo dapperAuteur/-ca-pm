@@ -1,7 +1,6 @@
 <template>
   <div class="">
     Name: {{ company.name }}
-    Name: {{ company.name }}
       <router-link
         :to="{ name: 'Company',
               params: {
@@ -13,7 +12,9 @@
 </template>
 
 <script>
-  import { eventBus } from '../../main';
+  import store from './../../store/store';
+  import { state, mutations, getters, } from './../../store/modules/companies';
+
   export default {
     props: ['company', 'companyDetails'],
     data: function(){
@@ -23,14 +24,9 @@
     },
     methods: {
       companySelected() {
-        console.log(this.company);
-        eventBus.$emit('companySelected', this.company)
+        this.$store.state.company = this.company;
         }
     },
-    created() {
-      eventBus.$on('companySelected', (company) => {
-      });
-    }
   }
 </script>
 

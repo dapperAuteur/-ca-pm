@@ -1,12 +1,16 @@
 import companies from '../../data/stocks';
 
 const state = {
-  companies: []
+  companies: [],
+  company: {}
 };
 
 const mutations = {
   'SET_COMPANIES' (state, companies) {
     state.companies = companies;
+  },
+  'SET_COMPANY' (state, company) {
+    state.company = company;
   },
   'RND_COMPANIES' (state) {
       state.companies.forEach(company => {
@@ -30,6 +34,9 @@ const actions = {
 const getters = {
   companies: state => {
     return state.companies; //refers to companies array from state on line 4
+  },
+  company: state => {
+    return state.company;
   }
 }
 
