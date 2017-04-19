@@ -1,64 +1,35 @@
 <template>
-  <div class="col-sm-6 col-md-4">
-    <div class="panel panel-success">
-      <router-link class="button" :to="{ name: 'Company', params: { id: company.id } }"> {{ company.id }} </router-link>
-      <h1>{{ company.name }} <img :src ="company.logo.url" class="img-thumbnail"/></h1>
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          Company Details
-          <small>{{ company.website }} (ID: {{ company.id }})</small>
-        </h3>
-      </div>
-      <div class="panel-body">
-        <div class="pull-left">
-          <input
-                  type="number"
-                  class="form-control"
-                  placeholder="Quantity"
-                  v-model="quantity"
-                  :class="{ danger: insufficientFunds }"
-                  >
-        </div>
-        <div class="pull-right">
-          <button
-                  class="btn btn-success"
-                  @click="buyCompany"
-                  :disabled="insufficientFunds || quantity <= 0 || Number.isInteger(quantity)"
-                  >{{ insufficientFunds ? 'Insufficient Funds' : 'Buy' }}</button>
-        </div>
-      </div>
-      <router-view></router-view>
-    </div>
+  <div class="">
+    Name: {{ company.name }}
+    Name: {{ company.name }}
+      <router-link
+        :to="{ name: 'Company',
+              params: {
+                id: company.id }}"
+                class="btn btn-primary" @click.native="companySelected" tag="li">
+        Company Id: {{ company.id }}
+      </router-link>
   </div>
 </template>
 
 <script>
+  import { eventBus } from '../../main';
   export default {
-    props: ['company'],
-    data() {
+    props: ['company', 'companyDetails'],
+    data: function(){
       return {
-        quantity: 0
-      }
-    },
-    computed: {
-      funds() {
-        return this.$store.getters.funds;
-      },
-      insufficientFunds() {
-        return this.quantity * this.company.price > this.funds;
+        companyId: null
       }
     },
     methods: {
-      buyCompany() {
-        const order = {
-          companyId: this.company.id,
-          companyPrice: this.company.price,
-          quantity: this.quantity
-        };
-        console.log(order);
-        this.$store.dispatch('buyCompany', order);
-        this.quantity = 0;
-      }
+      companySelected() {
+        console.log(this.company);
+        eventBus.$emit('companySelected', this.company)
+        }
+    },
+    created() {
+      eventBus.$on('companySelected', (company) => {
+      });
     }
   }
 </script>

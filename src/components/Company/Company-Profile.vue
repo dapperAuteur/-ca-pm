@@ -1,5 +1,5 @@
 <template>
-  <div id='companyProfile'>
+  <div id='companyDetails'>
     <h1>Company Profile Page</h1>
     <app-comp :compProf="compProf"></app-comp>
   </div>
@@ -8,15 +8,15 @@
 <script>
   import Companies from './Companies';
   export default {
-    name: 'companyProfile',
+    name: 'companyDetails',
     components: {
       appComp: CompProf
     },
-    // data: function(){
-    //   return {
-    //     companyProf: 'earl'
-    //   }
-    // },
+    data: function(){
+      return {
+        companyProf: 'earl'
+      }
+    },
     computed: {
       companies() {
         return this.$store.getters.companies;

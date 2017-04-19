@@ -4,7 +4,7 @@ import Hello from '@/components/Hello'
 import Home from '@/components/Home'
 import Companies from '@/components/Company/Companies'
 import Company from '@/components/Company/Company'
-import CompanyProfile from '@/components/Company/Company-Profile'
+import CompanyDetails from '@/components/Company/CompanyDetails'
 import Office from '@/components/Office/Office'
 import Offices from '@/components/Office/Offices'
 import Person from '@/components/Person/Person'
@@ -26,9 +26,9 @@ export default new Router({
       component: Companies
     },
     {
-      path: '/company/:id',
+      path: '/companies/:id',
       name: 'Company',
-      component: CompanyProfile
+      component: CompanyDetails
     },
     {
       path: '/offices',
